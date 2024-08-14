@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace EmircanBlog_Data.Repositories.Concrete
 {
-    public class Repository<T> : IRepository<T> where T: class , IEntityBase , new()
+    public class GenericRepository<T> : IGenericRepository<T> where T: class , IEntityBase , new()
     {
         private readonly EmircanContext _emircanContext;
 
-        public Repository(EmircanContext emircanContext)
+        public GenericRepository(EmircanContext emircanContext)
         {
             _emircanContext = emircanContext;
         }

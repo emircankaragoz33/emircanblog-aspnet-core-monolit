@@ -9,13 +9,12 @@ using System.Threading.Tasks;
 
 namespace EmircanBlog_Data.Mappings
 {
-    public class ArticleMap : IEntityTypeConfiguration<Article>
+    public class CategoryMap : IEntityTypeConfiguration<Category>
     {
-        public void Configure(EntityTypeBuilder<Article> builder)
+        public void Configure(EntityTypeBuilder<Category> builder)
         {
             builder.HasKey(c => c.Id);
-
-            builder.HasOne(c=>c.Category).WithMany(c=>c.Articles).HasForeignKey(c=>c.CategoryId).OnDelete(DeleteBehavior.Restrict);
+            
             
         }
     }

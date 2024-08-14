@@ -27,9 +27,9 @@ namespace EmircanBlog_Data.UnitOfWorks
            return _emircanContext.SaveChangesAsync();
         }
 
-        IRepository<T> IUnitOfWork.GetRepository<T>()
+        IGenericRepository<T> IUnitOfWork.GetRepository<T>()
         {
-            return new Repository<T>(_emircanContext);
+            return new GenericRepository<T>(_emircanContext);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace EmircanBlog_Data.DataExtensions
     {
         public static IServiceCollection LoadDALExtensions(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddScoped(typeof(IRepository<>),typeof(Repository<>));
+            services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<>));
 
             return services;
         }
