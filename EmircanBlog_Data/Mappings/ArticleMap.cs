@@ -16,6 +16,8 @@ namespace EmircanBlog_Data.Mappings
             builder.HasKey(c => c.Id);
 
             builder.HasOne(c=>c.Category).WithMany(c=>c.Articles).HasForeignKey(c=>c.CategoryId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(c=>c.User).WithMany(c=>c.Articles).HasForeignKey(c=>c.UserId).OnDelete(DeleteBehavior.Restrict);
+
             
         }
     }

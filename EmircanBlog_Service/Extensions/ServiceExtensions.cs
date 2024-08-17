@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,9 +16,10 @@ namespace EmircanBlog_Service.Extensions
     {
         public static IServiceCollection LoadServiceExtensions(this IServiceCollection services)
         {
-            services.AddScoped<IArticleService, ArticleService>();
-            services.AddScoped<IImageService, ImageService>();
-            services.AddScoped<ICategoryService, CategoryService>();
+            var assembly = Assembly.GetExecutingAssembly();
+           
+
+            services.AddAutoMapper(assembly);
 
             return services;
         }
