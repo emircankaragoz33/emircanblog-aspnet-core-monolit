@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\EmircanBlog_Data\EmircanBlog_Data.csproj" />
     <ProjectReference Include="..\EmircanBlog_Entity\EmircanBlog_Entity.csproj" />
   </ItemGroup>

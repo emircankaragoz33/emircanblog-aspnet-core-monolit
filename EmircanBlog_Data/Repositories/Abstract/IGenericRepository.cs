@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EmircanBlog_Data.Repositories.Abstract
 {
-    public interface IGenericRepository<T> where T : class , IEntityBase , new()
+    public interface IGenericRepository<T> where T : class  , new()
     {
         Task AddAsync(T Entity);
         Task<List<T>> GetAllAsync(Expression<Func<T, bool>> filter = null, params Expression<Func<T, object>>[] includePropereties);
@@ -18,7 +18,7 @@ namespace EmircanBlog_Data.Repositories.Abstract
        Task DeleteAsync(T Entity);
         Task<bool> AnyAsync(Expression<Func<T, bool>> filter = null);
 
-        Task<int> CountAsync(Expression<Func<T, bool>> filter = null);
+        Task<int> CountAsync(Expression<Func<T, int>> filter = null);
       
 
 

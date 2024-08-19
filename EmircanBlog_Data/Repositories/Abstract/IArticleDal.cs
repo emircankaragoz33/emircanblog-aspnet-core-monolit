@@ -3,13 +3,14 @@ using EmircanBlog_Entity.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EmircanBlog_Service.Abstract
+namespace EmircanBlog_Data.Repositories.Abstract
 {
-    public interface ICategoryService : IGenericService<CategoryDto>
+    public interface IArticleDal : IGenericRepository<Article>
     {
-
+   
     }
 }

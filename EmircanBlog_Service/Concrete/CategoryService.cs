@@ -1,4 +1,7 @@
-﻿using EmircanBlog_Data.Repositories.Concrete;
+﻿using AutoMapper;
+using EmircanBlog_Data.Repositories.Abstract;
+using EmircanBlog_Data.Repositories.Concrete;
+using EmircanBlog_Entity.Dtos;
 using EmircanBlog_Entity.Entities;
 using EmircanBlog_Service.Abstract;
 using System;
@@ -13,50 +16,60 @@ namespace EmircanBlog_Service.Concrete
 {
     public class CategoryService : ICategoryService
     {
+        private readonly IMapper _mapper;
+        private readonly ICategoryDal _categoryDal;
 
-        private readonly GenericRepository<Category> _repository;
-        public CategoryService(GenericRepository<Category> repository)
+        public CategoryService(ICategoryDal categoryDal)
         {
-            _repository = repository;
-        }
-        public async Task AddAsyncService(Category Entity)
-        {
-           await _repository.AddAsync(Entity);
+            _categoryDal = categoryDal;
         }
 
-        public async Task<bool> AnyAsyncService(Expression<Func<Category, bool>> filter = null)
+        public async Task AddAsyncService(CategoryDto Entity)
         {
-         return await _repository.AnyAsync(filter);
+           var category = _mapper.Map<Category>(Entity);
+            await _categoryDal.AddAsync(category);
         }
 
-        public async Task<int> CountAsyncService(Expression<Func<Category, bool>> filter = null)
+        public async Task<bool> AnyAsyncService(Guid id)
         {
-           return await (_repository.CountAsync(filter));   
+           return await _categoryDal.AnyAsync(C=>C.Id == id);
         }
 
-        public async Task DeleteAsyncService(Category Entity)
+        public async Task DeleteAsyncService(CategoryDto Entity)
         {
-           await _repository.DeleteAsync(Entity);
+            var category = _mapper.Map<Category>(Entity);
+            await _categoryDal.DeleteAsync(category);
         }
 
-        public async Task<List<Category>> GetAllAsyncService(Expression<Func<Category, bool>> filter = null, params Expression<Func<Category, object>>[] includePropereties)
+        public async Task<List<CategoryDto>> GetAllAsyncService()
         {
-           return await _repository.GetAllAsync(c => c.Id != null);
+            var categories = await _categoryDal.GetAllAsync(c=>c.IsDeleted == false);
+            var categoriesDto = _mapper.Map<List<CategoryDto>>(categories);
+            return categoriesDto;
         }
 
-        public async Task<Category> GetAsyncService(Expression<Func<Category, bool>> filter = null, params Expression<Func<Category, object>>[] includeProperties)
+        public async Task<CategoryDto> GetAsyncService(Guid id)
         {
-            return await _repository.GetAsync(c => c.Id != null);
+            var category = await _categoryDal.GetAsync(c => c.Id == id);
+            var categoryDto = _mapper.Map<CategoryDto>(category);
+            return categoryDto;
         }
 
-        public async Task<Category> GetByGuidAsyncService(Guid id)
+        public async Task<CategoryDto> GetByGuidAsyncService(Guid id)
         {
-            return await _repository.GetByGuidAsync(id);
+            var category = await _categoryDal.GetByGuidAsync(id);
+            var categoryDto = _mapper.Map<CategoryDto>(category);
+            return categoryDto;
         }
 
-        public async Task<Category> UpdateAsyncService(Category Entity)
+        public async Task<CategoryDto> UpdateAsyncService(CategoryDto Entity)
         {
-            return await _repository.UpdateAsync(Entity);
+            var category = _mapper.Map<Category>(Entity);
+            var categoryUpdate = await _categoryDal.UpdateAsync(category);
+            var map = _mapper.Map<CategoryDto>(categoryUpdate);
+
+            return map;
+
         }
     }
 }

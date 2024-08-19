@@ -10,13 +10,13 @@ namespace EmircanBlog_Service.Abstract
     public interface IGenericService<T>
     {
         Task AddAsyncService (T Entity);
-        Task<List<T>> GetAllAsyncService (Expression<Func<T, bool>> filter = null, params Expression<Func<T, object>>[] includePropereties);
-        Task<T> GetAsyncService (Expression<Func<T, bool>> filter = null, params Expression<Func<T, object>>[] includeProperties);
+        Task<List<T>> GetAllAsyncService ();
+        Task<T> GetAsyncService (Guid id);
         Task<T> GetByGuidAsyncService (Guid id);
         Task<T> UpdateAsyncService (T Entity);
         Task DeleteAsyncService (T Entity);
-        Task<bool> AnyAsyncService (Expression<Func<T, bool>> filter = null);
+        Task<bool> AnyAsyncService (Guid id);
 
-        Task<int> CountAsyncService(Expression<Func<T, bool>> filter = null);
+        //Task<int> CountAsyncService();
     }
 }

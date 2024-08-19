@@ -1,4 +1,7 @@
-﻿using EmircanBlog_Data.Repositories.Concrete;
+﻿using AutoMapper;
+using EmircanBlog_Data.Repositories.Abstract;
+using EmircanBlog_Data.Repositories.Concrete;
+using EmircanBlog_Entity.Dtos;
 using EmircanBlog_Entity.Entities;
 using EmircanBlog_Service.Abstract;
 using System;
@@ -12,49 +15,48 @@ namespace EmircanBlog_Service.Concrete
 {
     public class ImageService : IImageService
     {
-        private readonly GenericRepository<Image> _repository;
-        public ImageService(GenericRepository<Image> repository)
+        private readonly IMapper _mapper;
+        private readonly IImageDal _imageDal;
+
+        public ImageService(IMapper mapper , IImageDal imageDal)
         {
-            _repository = repository;
+            _mapper = mapper ; _imageDal = imageDal;
         }
-        public async Task AddAsyncService(Image Entity)
+        public async Task AddAsyncService(ImageDto Entity)
         {
-            await _repository.AddAsync(Entity);
+            var image = _mapper.Map<Image>(Entity);
+            await _imageDal.AddAsync(image);
         }
 
-        public async Task<bool> AnyAsyncService(Expression<Func<Image, bool>> filter = null)
+        public Task<bool> AnyAsyncService(Guid id)
         {
-            return await _repository.AnyAsync(filter);
+            throw new NotImplementedException();
         }
 
-        public async Task<int> CountAsyncService(Expression<Func<Image, bool>> filter = null)
+        public async Task DeleteAsyncService(ImageDto Entity)
         {
-            return await _repository.CountAsync(filter);
+            var image = _mapper.Map<Image>(Entity) ;
+            await _imageDal.DeleteAsync(image);
         }
 
-        public async Task DeleteAsyncService(Image Entity)
+        public Task<List<ImageDto>> GetAllAsyncService()
         {
-            await _repository.DeleteAsync(Entity);
+            throw new NotImplementedException();
         }
 
-        public async Task<List<Image>> GetAllAsyncService(Expression<Func<Image, bool>> filter = null, params Expression<Func<Image, object>>[] includePropereties)
+        public Task<ImageDto> GetAsyncService(Guid id)
         {
-            return await _repository.GetAllAsync(c => c.Id != null);
+            throw new NotImplementedException();
         }
 
-        public async Task<Image> GetAsyncService(Expression<Func<Image, bool>> filter = null, params Expression<Func<Image, object>>[] includeProperties)
+        public Task<ImageDto> GetByGuidAsyncService(Guid id)
         {
-            return await _repository.GetAsync(c => c.Id != null);
+            throw new NotImplementedException();
         }
 
-        public async Task<Image> GetByGuidAsyncService(Guid id)
+        public Task<ImageDto> UpdateAsyncService(ImageDto Entity)
         {
-            return await _repository.GetByGuidAsync(id);
-        }
-
-        public async Task<Image> UpdateAsyncService(Image Entity)
-        {
-            return await _repository.UpdateAsync(Entity);
+            throw new NotImplementedException();
         }
     }
 }

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace EmircanBlog_Data.Repositories.Concrete
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T: class , IEntityBase , new()
+    public class GenericRepository<T> : IGenericRepository<T> where T: class , new()
     {
         private readonly EmircanContext _emircanContext;
 

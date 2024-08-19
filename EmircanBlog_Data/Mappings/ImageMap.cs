@@ -1,5 +1,9 @@
 ﻿using EmircanBlog_Entity.Entities;
 using Microsoft.EntityFrameworkCore;
+<<<<<<< HEAD
+=======
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+>>>>>>> servisler yazıldı mapper eklendi.
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +14,7 @@ namespace EmircanBlog_Data.Mappings
 {
     public class ImageMap : IEntityTypeConfiguration<Image>
     {
+<<<<<<< HEAD
         public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Image> builder)
         {
             builder.HasKey(c => c.Id);
@@ -26,6 +31,12 @@ namespace EmircanBlog_Data.Mappings
                 CreatedDate = DateTime.Now,
                 IsDeleted = false
             });
+=======
+        public void Configure(EntityTypeBuilder<Image> builder)
+        {
+          builder.HasKey(x => x.Id);
+           
+>>>>>>> servisler yazıldı mapper eklendi.
         }
     }
 }

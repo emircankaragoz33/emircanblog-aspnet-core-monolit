@@ -1,4 +1,6 @@
-﻿using EmircanBlog_Entity.Entities;
+﻿using EmircanBlog_Data.Repositories.Concrete;
+using EmircanBlog_Entity.Dtos;
+using EmircanBlog_Entity.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace EmircanBlog_Service.Abstract
 {
-    public interface IImageService : IGenericService<Image>
+    public interface IImageService : IGenericService<ImageDto>
     {
 
     }
