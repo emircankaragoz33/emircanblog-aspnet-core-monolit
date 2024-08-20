@@ -17,8 +17,10 @@ namespace EmircanBlog_Service.Extensions
         public static IServiceCollection LoadServiceExtensions(this IServiceCollection services)
         {
             var assembly = Assembly.GetExecutingAssembly();
-           
 
+            services.AddScoped<IVisitorCountDal, VisitorCountDal>();
+            services.AddScoped<IVisitorService, VisitorService>();
+            services.AddScoped<IArticleService, ArticleService>();
             services.AddAutoMapper(assembly);
 
             return services;

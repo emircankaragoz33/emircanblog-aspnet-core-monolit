@@ -1,0 +1,159 @@
+﻿
+@using EmircanBlog_Entity.ViewModels
+@model ArticleViewModel
+
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yeni Makale Ekle</title>
+    <link rel="stylesheet" href="path-to-your-css-file.css">
+    <style>
+        .toolbar {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 5px;
+            background: #f8f9fa;
+        }
+        .toolbar button {
+            border: none;
+            background: transparent;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .toolbar button:hover {
+            background: #e9ecef;
+        }
+        .editor {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            min-height: 150px;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Yeni Makale Ekle</h2>
+        <form>
+            <!-- Article Title -->
+            <div class="form-group">
+                <label for="articleTitle">Title</label>
+                <input type="text"
+                       class="form-control"
+                       id="articleTitle"
+                       placeholder="Enter the article title" />
+            </div>
+
+            <!-- Article Category -->
+            <div class="form-group">
+                <label for="articleCategory">Category</label>
+                <select asp-for="CategoryId" asp-items="@ViewBag.categories" class="form-control"
+                        id="articleCategory">
+                    <option>Technology</option>
+                    <option>Science</option>
+                    <option>Health</option>
+                    <option>Education</option>
+                    <option>Others</option>
+                </select>
+            </div>
+
+            <!-- Article Size -->
+            <div class="form-group">
+                <label class="form-label">Size</label>
+                <div class="selectgroup w-100">
+                    <label class="selectgroup-item">
+                        <input type="radio"
+                               name="size"
+                               value="small"
+                               class="selectgroup-input"
+                               checked="" />
+                        <span class="selectgroup-button">Small</span>
+                    </label>
+                    <label class="selectgroup-item">
+                        <input type="radio"
+                               name="size"
+                               value="medium"
+                               class="selectgroup-input" />
+                        <span class="selectgroup-button">Medium</span>
+                    </label>
+                    <label class="selectgroup-item">
+                        <input type="radio"
+                               name="size"
+                               value="large"
+                               class="selectgroup-input" />
+                        <span class="selectgroup-button">Large</span>
+                    </label>
+                    <label class="selectgroup-item">
+                        <input type="radio"
+                               name="size"
+                               value="extra-large"
+                               class="selectgroup-input" />
+                        <span class="selectgroup-button">Extra Large</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Article Content -->
+            <div class="form-group">
+                <label for="articleContent">Content</label>
+                <div class="toolbar">
+                    <button type="button" onclick="document.execCommand('bold', false, '')"><b>B</b></button>
+                    <button type="button" onclick="document.execCommand('italic', false, '')"><i>I</i></button>
+                    <button type="button" onclick="document.execCommand('underline', false, '')"><u>U</u></button>
+                    <button type="button" onclick="document.execCommand('foreColor', false, 'red')">Red</button>
+                    <button type="button" onclick="addLink()">Link</button>
+                    <button type="button" onclick="addImage()">Image</button>
+                    <select onchange="document.execCommand('fontName', false, this.value)">
+                        <option value="">Font</option>
+                        <option value="Arial">Arial</option>
+                        <option value="Courier New">Courier New</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="Times New Roman">Times New Roman</option>
+                        <option value="Verdana">Verdana</option>
+                    </select>
+                </div>
+                <div id="editor" class="editor" contenteditable="true">
+                    <p>Start typing your content here...</p>
+                </div>
+            </div>
+
+            <!-- Article File Upload -->
+            <div class="form-group">
+                <label for="articleFile">Upload File</label>
+                <input type="file"
+                       class="form-control-file"
+                       id="articleFile" />
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">Submit</button>
+                <button type="reset" class="btn btn-danger">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function addLink() {
+            const url = prompt('Enter the URL:');
+            if (url) {
+                document.execCommand('createLink', false, url);
+            }
+        }
+
+        function addImage() {
+            const url = prompt('Enter the image URL:');
+            if (url) {
+                document.execCommand('insertImage', false, url);
+            }
+        }
+    </script>
+</body>
+</html>

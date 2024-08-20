@@ -33,9 +33,9 @@ namespace EmircanBlog_Data.Repositories.Concrete
             return await Table.AnyAsync();
         }
 
-        public async Task<int> CountAsync(Expression<Func<T, bool>> filter = null)
+        public async Task<int> CountAsync(Expression<Func<T, int>> filter = null)
         {
-            return await Table.CountAsync(filter);
+            throw new NotImplementedException();
         }
 
         public Task DeleteAsync(T Entity)

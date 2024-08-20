@@ -1,7 +1,17 @@
+using EmircanBlog_Data.DataExtensions;
+using EmircanBlog_Service.Abstract;
+using EmircanBlog_Service.Concrete;
+using EmircanBlog_Service.Extensions;
+using EmircanBlog_UI.Middlewares;
+
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.LoadDALExtensions(builder.Configuration);
+builder.Services.LoadServiceExtensions();
+
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
 
 var app = builder.Build();
 
@@ -13,15 +23,26 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
-app.UseStaticFiles();
 
-app.UseRouting();
+
+app.UseHttpsRedirection();  // HTTPS yönlendirmesi
+app.UseStaticFiles();       // Statik dosyalar
+
+app.UseRouting();           // Routing
+
+app.UseMiddleware<VisitorMiddleware>(); // Middleware'ler (Ýstek yönlendirmesi yapýlmadan önce çalýþmalý)
 
 app.UseAuthorization();
+
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapAreaControllerRoute(
+    name: "Admin",
+    areaName: "Admin",
+    pattern: "Admin/{controller=Home}/{action=Index}/{id?}");
+
 
 app.Run();
