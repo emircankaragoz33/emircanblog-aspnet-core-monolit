@@ -1,0 +1,75 @@
+﻿@using EmircanBlog_Entity.ViewModels
+@model CategoryViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="col-md-6">
+    <!-- Kategoriler Listesi -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Kategoriler</div>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Kategori Adı</th>
+                        <th scope="col">Aksiyonlar</th>
+                    </tr>
+                </thead>
+                <tbody id="categoryList">
+                    @foreach (var item in Model.Categories)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>
+                                <button class="btn btn-sm btn-warning">Düzenle</button>
+                                <button class="btn btn-sm btn-danger">Sil</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Yeni Kategori Ekleme Alanı -->
+    <div class="card mt-4">
+        <div class="card-header">
+            <div class="card-title">Yeni Kategori Ekle</div>
+        </div>
+        <div class="card-body">
+            <form id="categoryForm" method="post">
+                <div class="form-group">
+                    <label for="categoryName">Kategori Adı</label>
+                    <input asp-for="Name" type="text" class="form-control" id="categoryName" placeholder="Yeni kategori adı girin">
+                </div>
+                <button id="categoryNameButton" type="submit" class="btn btn-primary mt-2">Ekle</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+ <script>
+    document.getElementById('categoryForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        var formData = new FormData(this);
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", '@Url.Action("Index", "Admin/Category"), true);
+
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                document.getElementById('categoryList').innerHTML = xhr.responseText;
+                document.getElementById('categoryName').value = ''; // Formu temizle
+            } else {
+                alert('Kategori eklenemedi.');
+            }
+        };
+        xhr.send(formData);
+    });
+</script>

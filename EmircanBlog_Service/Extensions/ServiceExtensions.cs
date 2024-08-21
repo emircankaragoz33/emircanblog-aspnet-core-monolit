@@ -21,6 +21,7 @@ namespace EmircanBlog_Service.Extensions
             services.AddScoped<IVisitorCountDal, VisitorCountDal>();
             services.AddScoped<IVisitorService, VisitorService>();
             services.AddScoped<IArticleService, ArticleService>();
+            services.AddScoped<ICategoryService, CategoryService>();
             services.AddAutoMapper(assembly);
 
             return services;

@@ -19,9 +19,10 @@ namespace EmircanBlog_Service.Concrete
         private readonly IMapper _mapper;
         private readonly ICategoryDal _categoryDal;
 
-        public CategoryService(ICategoryDal categoryDal)
+        public CategoryService(ICategoryDal categoryDal, IMapper mapper)
         {
             _categoryDal = categoryDal;
+            _mapper = mapper;
         }
 
         public async Task AddAsyncService(CategoryDto Entity)

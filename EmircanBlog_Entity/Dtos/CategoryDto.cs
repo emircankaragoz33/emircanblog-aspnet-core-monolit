@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EmircanBlog_Entity.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,5 +10,8 @@ namespace EmircanBlog_Entity.Dtos
     public class CategoryDto
     {
         public string Name { get; set; }
+
+        
+     
     }
 }

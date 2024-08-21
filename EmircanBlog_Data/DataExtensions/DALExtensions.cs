@@ -19,6 +19,7 @@ namespace EmircanBlog_Data.DataExtensions
           
             services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<>));
             services.AddScoped<IArticleDal, ArticleDal>();
+            services.AddScoped<ICategoryDal, CategoryDal>();
             services.AddDbContext<EmircanContext>();
             services.AddIdentityCore<BlogUser>().AddEntityFrameworkStores<EmircanContext>();
 
