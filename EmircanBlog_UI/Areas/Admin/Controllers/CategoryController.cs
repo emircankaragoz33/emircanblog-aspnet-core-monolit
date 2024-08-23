@@ -34,7 +34,8 @@ namespace EmircanBlog_UI.Areas.Admin.Controllers
         public async Task <IActionResult> Index(CategoryViewModel categoryViewModel)
         {
             var categoryDto =  _mapper.Map<CategoryDto>(categoryViewModel);
-            await _categoryService.AddAsyncService(categoryDto);
+
+           await _categoryService.AddAsyncService(categoryDto);
             return RedirectToAction("Index", "Category", new { area = "Admin" });
         }
     }

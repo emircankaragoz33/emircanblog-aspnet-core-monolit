@@ -20,6 +20,6 @@ namespace EmircanBlog_Core
         public virtual DateTime? CreatedDate { get; set; }
         public virtual DateTime? ModifiedDate { get; set; }
         public virtual DateTime? DeletedDate { get; set; }
-        public virtual bool IsDeleted { get; set; }
+        public virtual bool IsDeleted { get; set; } = false;
     }
 }

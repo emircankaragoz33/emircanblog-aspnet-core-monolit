@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EmircanBlog_Data.Migrations
 {
     [DbContext(typeof(EmircanContext))]
-    [Migration("20240817231313_mig1")]
+    [Migration("20240822140545_mig1")]
     partial class mig1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -69,7 +69,7 @@ namespace EmircanBlog_Data.Migrations
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("ViewCount")
+                    b.Property<int?>("ViewCount")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -114,12 +114,13 @@ namespace EmircanBlog_Data.Migrations
                         new
                         {
                             Id = new Guid("638faba6-2abf-408e-9ccc-58c2c9a4f8fc"),
+                            ConcurrencyStamp = "6405a06a-cf63-42f9-a650-f8a9e230a6b8",
                             Name = "Admin"
                         },
                         new
                         {
                             Id = new Guid("7f2b3db2-4450-4155-b3eb-0539523ecbae"),
-                            ConcurrencyStamp = "829dc020-9772-430b-9011-41c03202c568",
+                            ConcurrencyStamp = "69a3220c-657c-46a9-b0d1-19455699b165",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -208,7 +209,7 @@ namespace EmircanBlog_Data.Migrations
                         {
                             Id = new Guid("8f9db5f5-b666-4773-97d6-e888a014606b"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b05d84b6-f7b4-4d7d-9517-42ab42179a88",
+                            ConcurrencyStamp = "9b00ce16-8ebf-456e-bbf3-70ef72f89d96",
                             Email = "emircankaragoz@hotmail.com",
                             EmailConfirmed = false,
                             FirstName = "Emircan",
@@ -217,7 +218,7 @@ namespace EmircanBlog_Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "EMIRCANKARAGOZ@HOTMAIL.COM",
                             NormalizedUserName = "EMIRCANKARAGOZ",
-                            PasswordHash = "AQAAAAIAAYagAAAAEO8/RJomx3B54Ox9SVqPrX3f/XJ+hhvlaq60mUKMDtfi/uhdDrZlc9kFoNvW9/Uwhg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEC9hTRlG7AjKPeLG8wE0NAUOwq6tNnsYrFnMMuAOjXy2UxMosTgzwClBZqANsNblTw==",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
                             UserName = "emircankaragoz"
@@ -304,11 +305,27 @@ namespace EmircanBlog_Data.Migrations
                         {
                             Id = new Guid("f71f4b9a-aa60-461d-b398-de31001bf214"),
                             CreatedBy = "Admin Test",
-                            CreatedDate = new DateTime(2024, 8, 18, 2, 13, 13, 459, DateTimeKind.Local).AddTicks(5626),
+                            CreatedDate = new DateTime(2024, 8, 22, 17, 5, 45, 313, DateTimeKind.Local).AddTicks(6511),
                             FileName = "images/testimage",
                             FileType = "jpg",
                             IsDeleted = false
                         });
+                });
+
+            modelBuilder.Entity("EmircanBlog_Entity.Entities.Visitor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Visitors");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -425,7 +442,7 @@ namespace EmircanBlog_Data.Migrations
                     b.HasOne("EmircanBlog_Entity.Entities.Image", "Image")
                         .WithMany("Articles")
                         .HasForeignKey("ImageId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("EmircanBlog_Entity.Entities.BlogUser", "User")

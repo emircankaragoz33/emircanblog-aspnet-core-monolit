@@ -9,5 +9,6 @@ namespace EmircanBlog_Entity.Entities
 {
     public class BlogRole :IdentityRole<Guid>
     {
+
     }
 }

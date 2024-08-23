@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using EmircanBlog_Data.Repositories.Abstract;
 using EmircanBlog_Data.Repositories.Concrete;
+using EmircanBlog_Data.UnitOfWorks;
 using EmircanBlog_Entity.Dtos;
 using EmircanBlog_Entity.Entities;
 using EmircanBlog_Service.Abstract;
@@ -18,16 +19,21 @@ namespace EmircanBlog_Service.Concrete
     {
         private readonly IArticleDal _articleDal;
         private readonly IMapper _mapper;
-        public ArticleService(IArticleDal articleDal , IMapper mapper)
+        private readonly IUnitOfWork _unitOfWork;
+        public ArticleService(IArticleDal articleDal , IMapper mapper , IUnitOfWork unitOfWork)
         {
             _articleDal = articleDal;
             _mapper = mapper;
+            _unitOfWork = unitOfWork;
         }
         public async Task AddAsyncService(ArticleDto Entity)
         {
             
             var article =  _mapper.Map<Article>(Entity);
+            article.IsDeleted = false;
+            article.CreatedDate = DateTime.Now;
             await _articleDal.AddAsync(article);
+            await _unitOfWork.SaveAsync();
 
         }
 

@@ -20,17 +20,26 @@ namespace EmircanBlog_Data.Repositories.Concrete
             _emircanContext = emircanContext;
         }
 
-        private DbSet<T> Table { get=> _emircanContext.Set<T>(); }
+        
 
         public async Task AddAsync(T Entity)
         {
-            await Table.AddAsync(Entity);
+            try
+            {
+                await _emircanContext.AddAsync(Entity);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+      
           
         }
 
         public async Task<bool> AnyAsync(Expression<Func<T, bool>> filter = null)
         {
-            return await Table.AnyAsync();
+            return await _emircanContext.Set<T>().AnyAsync(filter);
         }
 
         public async Task<int> CountAsync(Expression<Func<T, int>> filter = null)
@@ -45,7 +54,7 @@ namespace EmircanBlog_Data.Repositories.Concrete
 
         public async Task<List<T>>  GetAllAsync(Expression<Func<T,bool>> filter = null , params Expression<Func<T, object>>[] includeProperties)
         {
-            IQueryable<T> query = Table;
+            IQueryable<T> query = _emircanContext.Set<T>();
             if (filter != null)
             {
                 query = query.Where(filter);
@@ -66,7 +75,7 @@ namespace EmircanBlog_Data.Repositories.Concrete
 
         public async Task<T> GetAsync(Expression<Func<T, bool>> filter = null, params Expression<Func<T, object>>[] includeProperties)
         {
-            IQueryable<T> query = Table;
+            IQueryable<T> query = _emircanContext.Set<T>();
 
             if (filter != null)
             {
@@ -88,15 +97,14 @@ namespace EmircanBlog_Data.Repositories.Concrete
 
         public async Task<T> GetByGuidAsync(Guid id)
         {
-           var entity =  await Table.FindAsync(id);
-            return entity;
+            return await _emircanContext.Set<T>().FindAsync(id);
         }
 
         public async Task<T> UpdateAsync(T Entity)
         {
             await Task.Run(() =>
             {
-                Table.Update(Entity);
+                _emircanContext.Update(Entity);
             });
 
             return Entity;

@@ -16,6 +16,8 @@ namespace EmircanBlog_Service.AutoMapper.Articles
         {
             CreateMap<Article, ArticleDto>().ReverseMap();
             CreateMap<ArticleDto, ArticleViewModel>().ReverseMap();
+          
+            CreateMap<List<ArticleListViewModel>, List<ArticleDto>>().ReverseMap();
         }
 
     }

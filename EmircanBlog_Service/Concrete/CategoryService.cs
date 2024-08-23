@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using EmircanBlog_Data.Repositories.Abstract;
 using EmircanBlog_Data.Repositories.Concrete;
+using EmircanBlog_Data.UnitOfWorks;
 using EmircanBlog_Entity.Dtos;
 using EmircanBlog_Entity.Entities;
 using EmircanBlog_Service.Abstract;
@@ -18,17 +19,29 @@ namespace EmircanBlog_Service.Concrete
     {
         private readonly IMapper _mapper;
         private readonly ICategoryDal _categoryDal;
-
-        public CategoryService(ICategoryDal categoryDal, IMapper mapper)
+        private readonly IUnitOfWork _unitOfWork;
+        public CategoryService(ICategoryDal categoryDal, IMapper mapper,IUnitOfWork unitOfWork)
         {
             _categoryDal = categoryDal;
             _mapper = mapper;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task AddAsyncService(CategoryDto Entity)
         {
-           var category = _mapper.Map<Category>(Entity);
-            await _categoryDal.AddAsync(category);
+            try
+            {
+                var category = _mapper.Map<Category>(Entity);
+                await _categoryDal.AddAsync(category);
+                await _unitOfWork.SaveAsync();
+                
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+           
         }
 
         public async Task<bool> AnyAsyncService(Guid id)

@@ -14,8 +14,8 @@ namespace EmircanBlog_Data.Mappings
         public void Configure(EntityTypeBuilder<Category> builder)
         {
             builder.HasKey(c => c.Id);
-            
-            
+
+
         }
     }
 }

@@ -11,7 +11,8 @@ namespace EmircanBlog_Data.UnitOfWorks
     public interface IUnitOfWork : IAsyncDisposable
     {
         IGenericRepository<T> GetRepository<T>() where T : class, IEntityBase , new();
-    
+
+       
         Task<int> SaveAsync();
 
     }

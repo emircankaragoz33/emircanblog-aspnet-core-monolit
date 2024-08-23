@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EmircanBlog_Data.Migrations
 {
     [DbContext(typeof(EmircanContext))]
-    [Migration("20240820083126_mig2")]
-    partial class mig2
+    [Migration("20240823061404_mig3")]
+    partial class mig3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -69,7 +69,7 @@ namespace EmircanBlog_Data.Migrations
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("ViewCount")
+                    b.Property<int?>("ViewCount")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -114,13 +114,13 @@ namespace EmircanBlog_Data.Migrations
                         new
                         {
                             Id = new Guid("638faba6-2abf-408e-9ccc-58c2c9a4f8fc"),
-                            ConcurrencyStamp = "3508f978-777c-488c-9a43-f36f16ef2123",
+                            ConcurrencyStamp = "0fc41503-f859-4612-bd50-5a4182c3c62d",
                             Name = "Admin"
                         },
                         new
                         {
                             Id = new Guid("7f2b3db2-4450-4155-b3eb-0539523ecbae"),
-                            ConcurrencyStamp = "89e2eb35-87b0-4811-be3e-b2e6697db6f0",
+                            ConcurrencyStamp = "f99ffa2a-67fd-4f1e-b668-c44d6fded49a",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -209,7 +209,7 @@ namespace EmircanBlog_Data.Migrations
                         {
                             Id = new Guid("8f9db5f5-b666-4773-97d6-e888a014606b"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9189c976-0250-40ed-837a-b00b6fd77022",
+                            ConcurrencyStamp = "92843136-c4d6-4cc9-afc4-84f61732607a",
                             Email = "emircankaragoz@hotmail.com",
                             EmailConfirmed = false,
                             FirstName = "Emircan",
@@ -218,7 +218,7 @@ namespace EmircanBlog_Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "EMIRCANKARAGOZ@HOTMAIL.COM",
                             NormalizedUserName = "EMIRCANKARAGOZ",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDuTTu6+dr5Xbmb1CUiod18vAXAqo5yDTJIVekwmCaPEPygpQ3rTvk+AojuVuDcXeg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPYQGyWxtw6E+FdxKIchibyMXFHLH1HdW/HNt9k/vVvUR86m6sDKnNo4NHbDNhmjTA==",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
                             UserName = "emircankaragoz"
@@ -305,7 +305,7 @@ namespace EmircanBlog_Data.Migrations
                         {
                             Id = new Guid("f71f4b9a-aa60-461d-b398-de31001bf214"),
                             CreatedBy = "Admin Test",
-                            CreatedDate = new DateTime(2024, 8, 20, 11, 31, 26, 79, DateTimeKind.Local).AddTicks(8054),
+                            CreatedDate = new DateTime(2024, 8, 23, 9, 14, 3, 605, DateTimeKind.Local).AddTicks(4159),
                             FileName = "images/testimage",
                             FileType = "jpg",
                             IsDeleted = false
