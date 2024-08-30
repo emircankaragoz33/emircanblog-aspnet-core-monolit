@@ -49,15 +49,16 @@ namespace EmircanBlog_Service.Concrete
            return await _categoryDal.AnyAsync(C=>C.Id == id);
         }
 
-        public async Task DeleteAsyncService(CategoryDto Entity)
+        public async Task DeleteAsyncService(Guid id)
         {
-            var category = _mapper.Map<Category>(Entity);
+            var category = await _categoryDal.GetByGuidAsync(id);
             await _categoryDal.DeleteAsync(category);
+            await _unitOfWork.SaveAsync();
         }
 
-        public async Task<List<CategoryDto>> GetAllAsyncService()
+        public async Task<List<CategoryDto>> GetAllAsyncService(Guid UserId)
         {
-            var categories = await _categoryDal.GetAllAsync(c=>c.IsDeleted == false);
+            var categories = await _categoryDal.GetAllAsync(c=>c.IsDeleted == false && c.UserId == UserId);
             var categoriesDto = _mapper.Map<List<CategoryDto>>(categories);
             return categoriesDto;
         }

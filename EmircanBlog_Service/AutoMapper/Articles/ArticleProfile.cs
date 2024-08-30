@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EmircanBlog_Entity.Dtos;
+using EmircanBlog_Entity.Dtos.UpdateDtos;
 using EmircanBlog_Entity.Entities;
 using EmircanBlog_Entity.ViewModels;
 using System;
@@ -17,7 +18,12 @@ namespace EmircanBlog_Service.AutoMapper.Articles
             CreateMap<Article, ArticleDto>().ReverseMap();
             CreateMap<ArticleDto, ArticleViewModel>().ReverseMap();
           
-            CreateMap<List<ArticleListViewModel>, List<ArticleDto>>().ReverseMap();
+            CreateMap<ArticleListViewModel, ArticleDto>().ReverseMap();
+            CreateMap<ArticleUpdateDto, ArticleDto>().ReverseMap();
+            CreateMap<Article, ArticleUpdateDto>().ReverseMap();
+
+      
+      
         }
 
     }

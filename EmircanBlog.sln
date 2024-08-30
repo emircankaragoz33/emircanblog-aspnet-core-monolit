@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmircanBlog_Data", "Emircan
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmircanBlog_Service", "EmircanBlog_Service\EmircanBlog_Service.csproj", "{1B30C236-ACE1-4BCB-9C28-E1A531C81DC7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmircanBlog_UI", "EmircanBlog_UI\EmircanBlog_UI.csproj", "{FC0E5732-99FB-4794-910C-5F32FB371DD2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmircanBlog_UI", "EmircanBlog_UI\EmircanBlog_UI.csproj", "{FC0E5732-99FB-4794-910C-5F32FB371DD2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -3,8 +3,11 @@ using EmircanBlog_Data.Repositories.Abstract;
 using EmircanBlog_Data.Repositories.Concrete;
 using EmircanBlog_Data.UnitOfWorks;
 using EmircanBlog_Entity.Dtos;
+using EmircanBlog_Entity.Dtos.UpdateDtos;
 using EmircanBlog_Entity.Entities;
+using EmircanBlog_Entity.Enums;
 using EmircanBlog_Service.Abstract;
+using EmircanBlog_Service.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,18 +23,33 @@ namespace EmircanBlog_Service.Concrete
         private readonly IArticleDal _articleDal;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
-        public ArticleService(IArticleDal articleDal , IMapper mapper , IUnitOfWork unitOfWork)
+        private readonly IImageHelper _imageHelper;
+        private readonly IImageService _imageService;
+        public ArticleService(IArticleDal articleDal , IMapper mapper , IUnitOfWork unitOfWork , IImageHelper imageHelper , IImageService imageService)
         {
             _articleDal = articleDal;
             _mapper = mapper;
             _unitOfWork = unitOfWork;
+            _imageService = imageService;
+            _imageHelper = imageHelper;
         }
         public async Task AddAsyncService(ArticleDto Entity)
         {
-            
+            var imageUpload = await _imageHelper.Upload(Entity.Title, Entity.formFile, ImageType.Post);
+            Image image = new()
+            {
+                FileName = imageUpload.FullName,
+                FileType = Entity.formFile.ContentType,
+                UserId = Entity.UserId
+            };
+
+            await _imageService.AddAsyncService(image);
+
+
             var article =  _mapper.Map<Article>(Entity);
             article.IsDeleted = false;
             article.CreatedDate = DateTime.Now;
+            article.ImageId = image.Id;
             await _articleDal.AddAsync(article);
             await _unitOfWork.SaveAsync();
 
@@ -50,16 +68,17 @@ namespace EmircanBlog_Service.Concrete
         //    return await _articleDal.CountAsync(countFilter);
         //}
 
-        public async Task DeleteAsyncService(ArticleDto Entity)
+        public async Task DeleteAsyncService(Guid id)
         {
-            var article = _mapper.Map<Article>(Entity);
+          var article =   await _articleDal.GetByGuidAsync(id);
             await _articleDal.DeleteAsync(article);
+            await _unitOfWork.SaveAsync();
 
         }
 
-        public async Task<List<ArticleDto>> GetAllAsyncService()
+        public async Task<List<ArticleDto>> GetAllAsyncService(Guid UserId)
         {
-            var articles = await _articleDal.GetAllAsync(c=>c.IsDeleted == false);
+            var articles = await _articleDal.GetAllAsync(c=>c.IsDeleted == false && c.UserId == UserId , c=>c.Category);
 
             var articleDtos = _mapper.Map<List<ArticleDto>>(articles);
             return articleDtos;
@@ -68,7 +87,7 @@ namespace EmircanBlog_Service.Concrete
         public async Task<ArticleDto> GetAsyncService(Guid id)
         {
 
-            var article = await _articleDal.GetAsync(c=>c.Id == id);
+            var article = await _articleDal.GetAsync(c=>c.Id == id , c=>c.Category , c=>c.User , c=>c.Image);
             var articleDto = _mapper.Map<ArticleDto>(article);
             return articleDto;
 
@@ -82,12 +101,27 @@ namespace EmircanBlog_Service.Concrete
             return articleDto;
         }
 
-        public async Task<ArticleDto> UpdateAsyncService(ArticleDto Entity)
+        public Task<ArticleDto> UpdateAsyncService(ArticleDto Entity)
         {
-            var article = _mapper.Map<Article>(Entity);
-            var articleUpdate = await _articleDal.UpdateAsync(article);
-            var map = _mapper.Map<ArticleDto>(articleUpdate);
-            return map;
+            throw new NotImplementedException();
+        }
+
+        public async Task<ArticleUpdateDto> UpdateAsyncServiceUpdateDto(ArticleUpdateDto Entity)
+        {
+            var article = await _articleDal.GetByGuidAsync(Entity.Id);
+
+            var articleEntity = _mapper.Map(Entity, article);
+
+           var updatedEntity =  await _articleDal.UpdateAsync(articleEntity);
+
+            await _unitOfWork.SaveAsync();
+
+            var articleUpdateDto = _mapper.Map<ArticleUpdateDto>(updatedEntity);
+
+            return articleUpdateDto;
+            
+
+           
         }
     }
 }

@@ -14,7 +14,7 @@ namespace EmircanBlog_Entity.Entities
         public string FileType { get; set; }
         public ICollection<Article> Articles { get; set; }
         public ICollection<BlogUser> Users { get; set; }
-
+        public Guid UserId { get; set; }
 
         
        

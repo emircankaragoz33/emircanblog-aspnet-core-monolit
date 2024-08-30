@@ -47,9 +47,12 @@ namespace EmircanBlog_Data.Repositories.Concrete
             throw new NotImplementedException();
         }
 
-        public Task DeleteAsync(T Entity)
+        public async Task DeleteAsync(T Entity)
         {
-            throw new NotImplementedException();
+            await Task.Run(() =>
+            {
+                _emircanContext.Remove(Entity);
+            });
         }
 
         public async Task<List<T>>  GetAllAsync(Expression<Func<T,bool>> filter = null , params Expression<Func<T, object>>[] includeProperties)

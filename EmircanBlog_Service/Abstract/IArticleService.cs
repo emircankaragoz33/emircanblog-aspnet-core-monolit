@@ -1,5 +1,6 @@
 ﻿using EmircanBlog_Data.Repositories.Concrete;
 using EmircanBlog_Entity.Dtos;
+using EmircanBlog_Entity.Dtos.UpdateDtos;
 using EmircanBlog_Entity.Entities;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,6 @@ namespace EmircanBlog_Service.Abstract
 {
     public interface IArticleService  : IGenericService<ArticleDto>
     {
-
+        Task<ArticleUpdateDto> UpdateAsyncServiceUpdateDto(ArticleUpdateDto Entity);
     }
 }

@@ -41,7 +41,7 @@
 <body>
     <div class="container">
         <h2>Yeni Makale Ekle</h2>
-        <form id="articleForm" method="post" >
+        <form id="articleForm" method="post" enctype="multipart/form-data" >
             <!-- Article Title -->
             <div class="form-group">
                 <label for="articleTitle">Başlık</label>
@@ -54,13 +54,9 @@
             <!-- Article Category -->
             <div class="form-group">
                 <label for="articleCategory">Category</label>
-                <select asp-for="CategoryId" asp-items="@ViewBag.categories" class="form-control"
+                <select asp-for="CategoryId" asp-items="@ViewBag.Categories" class="form-control"
                         id="articleCategory">
-                    <option>Technology</option>
-                    <option>Science</option>
-                    <option>Health</option>
-                    <option>Education</option>
-                    <option>Others</option>
+                    <option value=""> </option> 
                 </select>
             </div>
 
@@ -104,34 +100,15 @@
            
                 <div class="form-group">
                     <label asp-for="Content">Content</label>
-                    <div class="toolbar">
-                        <button type="button" onclick="document.execCommand('bold', false, '')"><b>B</b></button>
-                        <button type="button" onclick="document.execCommand('italic', false, '')"><i>I</i></button>
-                        <button type="button" onclick="document.execCommand('underline', false, '')"><u>U</u></button>
-                        <button type="button" onclick="document.execCommand('foreColor', false, 'red')">Red</button>
-                        <button type="button" onclick="addLink()">Link</button>
-                        <button type="button" onclick="addImage()">Image</button>
-                        <select onchange="document.execCommand('fontName', false, this.value)">
-                            <option value="">Font</option>
-                            <option value="Arial">Arial</option>
-                            <option value="Courier New">Courier New</option>
-                            <option value="Georgia">Georgia</option>
-                            <option value="Times New Roman">Times New Roman</option>
-                            <option value="Verdana">Verdana</option>
-                        </select>
-                    </div>
-                    <div id="editor" class="editor" contenteditable="true">
-                        <p>Start typing your content here...</p>
-                    </div>
-                </div>
-                <input type="hidden" asp-for="Content" />
-                <button type="submit" class="btn btn-primary">Save</button>
+                <textarea id="Content" name="Content" asp-for="Content" class="form-control" rows="10" placeholder="Enter content here">@Model.Content</textarea>
        
-
+                </div>
+             
+              
             <!-- Article File Upload -->
             <div class="form-group">
                 <label for="articleFile">Upload File</label>
-                <input type="file"
+                <input asp-for="formFile" type="file"
                        class="form-control-file"
                        id="articleFile" />
             </div>
@@ -144,27 +121,26 @@
         </form>
     </div>
 
+
+    <script src="https://cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
+
     <script>
 
-        document.getElementById('articleForm').addEventListener('submit', () => {
-            var editorContent = document.getElementById('editor').innerHTML;
-            document.querySelector('input[name="Content"]').value = editorContent;
+        CKEDITOR.replace('Content', {
+            height: 400,
+            toolbar: [
+                { name: 'document', items: ['Source', '-', 'NewPage', 'Preview', '-', 'Templates'] },
+                { name: 'clipboard', items: ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo'] },
+                { name: 'editing', items: ['Find', 'Replace', '-', 'SelectAll'] },
+                { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', '-', 'RemoveFormat'] },
+                { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote'] },
+                { name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'SpecialChar'] },
+                { name: 'styles', items: ['Styles', 'Format', 'Font', 'FontSize'] },
+                { name: 'colors', items: ['TextColor', 'BGColor'] },
+                { name: 'tools', items: ['Maximize'] }
+            ]
         });
-
-
-        function addLink() {
-            const url = prompt('Enter the URL:');
-            if (url) {
-                document.execCommand('createLink', false, url);
-            }
-        }
-
-        function addImage() {
-            const url = prompt('Enter the image URL:');
-            if (url) {
-                document.execCommand('insertImage', false, url);
-            }
-        }
     </script>
 </body>
 </html>
+

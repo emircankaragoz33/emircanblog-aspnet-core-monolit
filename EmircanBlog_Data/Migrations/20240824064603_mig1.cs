@@ -260,22 +260,22 @@ namespace EmircanBlog_Data.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { new Guid("638faba6-2abf-408e-9ccc-58c2c9a4f8fc"), "6405a06a-cf63-42f9-a650-f8a9e230a6b8", "Admin", null });
+                values: new object[] { new Guid("638faba6-2abf-408e-9ccc-58c2c9a4f8fc"), "210c5fe4-20c3-428e-91d4-fe5be58d678e", "Admin", null });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { new Guid("7f2b3db2-4450-4155-b3eb-0539523ecbae"), "69a3220c-657c-46a9-b0d1-19455699b165", "User", "USER" });
+                values: new object[] { new Guid("7f2b3db2-4450-4155-b3eb-0539523ecbae"), "f9c2fb9d-2fce-4101-9aa6-3f872055b79b", "User", "USER" });
 
             migrationBuilder.InsertData(
                 table: "Images",
                 columns: new[] { "Id", "CreatedBy", "CreatedDate", "DeletedBy", "DeletedDate", "FileName", "FileType", "IsDeleted", "ModifiedBy", "ModifiedDate" },
-                values: new object[] { new Guid("f71f4b9a-aa60-461d-b398-de31001bf214"), "Admin Test", new DateTime(2024, 8, 22, 17, 5, 45, 313, DateTimeKind.Local).AddTicks(6511), null, null, "images/testimage", "jpg", false, null, null });
+                values: new object[] { new Guid("f71f4b9a-aa60-461d-b398-de31001bf214"), "Admin Test", new DateTime(2024, 8, 24, 9, 46, 3, 49, DateTimeKind.Local).AddTicks(7493), null, null, "images/testimage", "jpg", false, null, null });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "ImageId", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { new Guid("8f9db5f5-b666-4773-97d6-e888a014606b"), 0, "9b00ce16-8ebf-456e-bbf3-70ef72f89d96", "emircankaragoz@hotmail.com", false, "Emircan", new Guid("f71f4b9a-aa60-461d-b398-de31001bf214"), "Karagöz", false, null, "EMIRCANKARAGOZ@HOTMAIL.COM", "EMIRCANKARAGOZ", "AQAAAAEAACcQAAAAEC9hTRlG7AjKPeLG8wE0NAUOwq6tNnsYrFnMMuAOjXy2UxMosTgzwClBZqANsNblTw==", null, false, null, false, "emircankaragoz" });
+                values: new object[] { new Guid("8f9db5f5-b666-4773-97d6-e888a014606b"), 0, "a816159f-a1a7-4667-bb52-a164c8e7eff1", "emircankaragoz@hotmail.com", false, "Emircan", new Guid("f71f4b9a-aa60-461d-b398-de31001bf214"), "Karagöz", false, null, "EMIRCANKARAGOZ@HOTMAIL.COM", "EMIRCANKARAGOZ", "AQAAAAEAACcQAAAAEPsBNs57mqHyhHdBw5LvIn2Fn3EesTGrkaW1fuvM5hOZbmR6+pN437oM1pgdj8V+iA==", null, false, null, false, "emircankaragoz" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Articles_CategoryId",

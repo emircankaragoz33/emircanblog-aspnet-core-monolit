@@ -3,6 +3,7 @@ using EmircanBlog_Data.Repositories.Abstract;
 using EmircanBlog_Data.Repositories.Concrete;
 using EmircanBlog_Data.UnitOfWorks;
 using EmircanBlog_Entity.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -21,9 +22,10 @@ namespace EmircanBlog_Data.DataExtensions
             services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<>));
             services.AddScoped<IArticleDal, ArticleDal>();
             services.AddScoped<ICategoryDal, CategoryDal>();
+            services.AddScoped<IImageDal, ImageDal>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddDbContext<EmircanContext>();
-            services.AddIdentityCore<BlogUser>().AddEntityFrameworkStores<EmircanContext>();
+            services.AddIdentity<BlogUser,BlogRole>().AddEntityFrameworkStores<EmircanContext>().AddDefaultTokenProviders();
 
             return services;
         }

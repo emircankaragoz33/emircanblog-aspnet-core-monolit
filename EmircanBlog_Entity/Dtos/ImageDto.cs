@@ -8,8 +8,6 @@ namespace EmircanBlog_Entity.Dtos
 {
     public class ImageDto
     {
-        public Guid Id { get; set; }
-        public string FileName { get; set; }
-        public string FileType { get; set; }
+        public string FullName { get; set; }
     }
 }

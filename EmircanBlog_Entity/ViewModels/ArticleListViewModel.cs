@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EmircanBlog_Entity.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,12 @@ namespace EmircanBlog_Entity.ViewModels
          public  string CreatedBy { get; set; }
         public  string ModifiedBy { get; set; }
         public  string DeletedBy { get; set; }
-      
+        public virtual DateTime? CreatedDate { get; set; }
+        public virtual DateTime? ModifiedDate { get; set; }
+        public virtual DateTime? DeletedDate { get; set; }
+
+        public Category  Category { get; set; }
+
         public Guid ImageId { get; set; }
 
      

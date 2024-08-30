@@ -12,6 +12,9 @@ namespace EmircanBlog_Entity.Entities
 
 
         public string Name { get; set; }
+
+        public Guid UserId { get; set; }    
+       
         public ICollection<Article> Articles { get; set; }
     }
 }

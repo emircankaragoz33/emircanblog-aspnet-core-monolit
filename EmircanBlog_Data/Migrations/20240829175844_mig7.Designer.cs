@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EmircanBlog_Data.Migrations
 {
     [DbContext(typeof(EmircanContext))]
-    [Migration("20240822140545_mig1")]
-    partial class mig1
+    [Migration("20240829175844_mig7")]
+    partial class mig7
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -49,8 +49,7 @@ namespace EmircanBlog_Data.Migrations
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("ImageId")
-                        .IsRequired()
+                    b.Property<Guid>("ImageId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsDeleted")
@@ -114,13 +113,13 @@ namespace EmircanBlog_Data.Migrations
                         new
                         {
                             Id = new Guid("638faba6-2abf-408e-9ccc-58c2c9a4f8fc"),
-                            ConcurrencyStamp = "6405a06a-cf63-42f9-a650-f8a9e230a6b8",
+                            ConcurrencyStamp = "3938062b-b04f-41ba-9474-4eaef95d8139",
                             Name = "Admin"
                         },
                         new
                         {
                             Id = new Guid("7f2b3db2-4450-4155-b3eb-0539523ecbae"),
-                            ConcurrencyStamp = "69a3220c-657c-46a9-b0d1-19455699b165",
+                            ConcurrencyStamp = "58f1a64b-d7ee-427d-89a0-9efcad767d70",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -209,7 +208,7 @@ namespace EmircanBlog_Data.Migrations
                         {
                             Id = new Guid("8f9db5f5-b666-4773-97d6-e888a014606b"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9b00ce16-8ebf-456e-bbf3-70ef72f89d96",
+                            ConcurrencyStamp = "7b4b3f4f-d2ea-4e76-9a41-49710f748e99",
                             Email = "emircankaragoz@hotmail.com",
                             EmailConfirmed = false,
                             FirstName = "Emircan",
@@ -218,7 +217,7 @@ namespace EmircanBlog_Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "EMIRCANKARAGOZ@HOTMAIL.COM",
                             NormalizedUserName = "EMIRCANKARAGOZ",
-                            PasswordHash = "AQAAAAEAACcQAAAAEC9hTRlG7AjKPeLG8wE0NAUOwq6tNnsYrFnMMuAOjXy2UxMosTgzwClBZqANsNblTw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEBiuSlzJnWpA9b6xDCrIts2AacK4CTEHStgE5Ub8glVrVPM01vOD7KKnq1f5+hdyw==",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
                             UserName = "emircankaragoz"
@@ -229,6 +228,9 @@ namespace EmircanBlog_Data.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("BlogUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CreatedBy")
@@ -256,7 +258,12 @@ namespace EmircanBlog_Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("BlogUserId");
 
                     b.ToTable("Categories");
                 });
@@ -296,6 +303,9 @@ namespace EmircanBlog_Data.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.ToTable("Images");
@@ -305,10 +315,11 @@ namespace EmircanBlog_Data.Migrations
                         {
                             Id = new Guid("f71f4b9a-aa60-461d-b398-de31001bf214"),
                             CreatedBy = "Admin Test",
-                            CreatedDate = new DateTime(2024, 8, 22, 17, 5, 45, 313, DateTimeKind.Local).AddTicks(6511),
+                            CreatedDate = new DateTime(2024, 8, 29, 20, 58, 44, 126, DateTimeKind.Local).AddTicks(871),
                             FileName = "images/testimage",
                             FileType = "jpg",
-                            IsDeleted = false
+                            IsDeleted = false,
+                            UserId = new Guid("00000000-0000-0000-0000-000000000000")
                         });
                 });
 
@@ -469,6 +480,13 @@ namespace EmircanBlog_Data.Migrations
                     b.Navigation("Image");
                 });
 
+            modelBuilder.Entity("EmircanBlog_Entity.Entities.Category", b =>
+                {
+                    b.HasOne("EmircanBlog_Entity.Entities.BlogUser", null)
+                        .WithMany("Categories")
+                        .HasForeignKey("BlogUserId");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.HasOne("EmircanBlog_Entity.Entities.BlogRole", null)
@@ -523,6 +541,8 @@ namespace EmircanBlog_Data.Migrations
             modelBuilder.Entity("EmircanBlog_Entity.Entities.BlogUser", b =>
                 {
                     b.Navigation("Articles");
+
+                    b.Navigation("Categories");
                 });
 
             modelBuilder.Entity("EmircanBlog_Entity.Entities.Category", b =>

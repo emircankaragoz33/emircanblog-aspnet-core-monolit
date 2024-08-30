@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using AutoMapper.Configuration.Annotations;
 using EmircanBlog_Data.Repositories.Abstract;
 using EmircanBlog_Data.Repositories.Concrete;
+using EmircanBlog_Data.UnitOfWorks;
 using EmircanBlog_Entity.Dtos;
 using EmircanBlog_Entity.Entities;
 using EmircanBlog_Service.Abstract;
@@ -17,15 +19,17 @@ namespace EmircanBlog_Service.Concrete
     {
         private readonly IMapper _mapper;
         private readonly IImageDal _imageDal;
-
-        public ImageService(IMapper mapper , IImageDal imageDal)
+        private readonly IUnitOfWork _unitOfWork;
+        
+        public ImageService(IMapper mapper , IImageDal imageDal , IUnitOfWork unitOfWork)
         {
-            _mapper = mapper ; _imageDal = imageDal;
+            _mapper = mapper ; _imageDal = imageDal; _unitOfWork = unitOfWork;
         }
-        public async Task AddAsyncService(ImageDto Entity)
+        public async Task AddAsyncService(Image Entity)
         {
-            var image = _mapper.Map<Image>(Entity);
-            await _imageDal.AddAsync(image);
+           
+            await _imageDal.AddAsync(Entity);
+            await _unitOfWork.SaveAsync();
         }
 
         public Task<bool> AnyAsyncService(Guid id)
@@ -33,30 +37,37 @@ namespace EmircanBlog_Service.Concrete
             throw new NotImplementedException();
         }
 
-        public async Task DeleteAsyncService(ImageDto Entity)
+        public async Task DeleteAsyncService(Image Entity)
         {
             var image = _mapper.Map<Image>(Entity) ;
             await _imageDal.DeleteAsync(image);
         }
 
-        public Task<List<ImageDto>> GetAllAsyncService()
+        public Task<List<Image>> GetAllAsyncService(Guid UserId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<ImageDto> GetAsyncService(Guid id)
+        public async Task<Image> GetAsyncService(Guid id)
+        {
+            var image = await _imageDal.GetAsync(c=>c.Id == id);
+            return image;
+        }
+
+        public Task<Image> GetByGuidAsyncService(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<ImageDto> GetByGuidAsyncService(Guid id)
+        public Task<Image> UpdateAsyncService(Image Entity)
         {
             throw new NotImplementedException();
         }
 
-        public Task<ImageDto> UpdateAsyncService(ImageDto Entity)
+        public async Task<Image> GetImageByUserId(Guid id)
         {
-            throw new NotImplementedException();
+         var image = await _imageDal.GetAsync(c=>c.UserId == id);
+            return image;
         }
     }
 }

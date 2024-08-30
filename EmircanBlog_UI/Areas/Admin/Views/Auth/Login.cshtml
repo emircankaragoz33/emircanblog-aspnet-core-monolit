@@ -1,0 +1,107 @@
+﻿@using EmircanBlog_Entity.ViewModels
+@model LoginViewModel
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="~/newadmintemplate/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/newadmintemplate/assets/css/plugins.min.css" />
+    <link rel="stylesheet" href="~/newadmintemplate/assets/css/kaiadmin.min.css" />
+
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link rel="stylesheet" href="~/newadmintemplate/assets/css/demo.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="path-to-your-css-file.css">
+    <style>
+        .login-container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: #f8f9fa;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+            .login-container h2 {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+            .form-group label {
+                margin-bottom: 5px;
+                font-weight: bold;
+            }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            border-color: #007bff;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #004085;
+            }
+    </style>
+</head>
+<body>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="container">
+        <div class="login-container">
+            <h2>Login</h2>
+            <form method="post" asp-action="Login">
+                <div class="form-group">
+                    <label asp-for="Email">Mail adresiniz</label>
+                    <input asp-for="Email" type="text" class="form-control" placeholder="Mail adresinizi giriniz." />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+            
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password">Şifreniz.</label>
+                    <input asp-for="Password" type="password" class="form-control" placeholder="Enter your password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <input asp-for="RememberMe" type="checkbox" class="form-check-input" id="rememberMeCheck" />
+                    <label class="form-check-label" for="rememberMeCheck">Beni hatırla</label>
+
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+
+                <div asp-validation-summary="All"></div>
+
+            </form>
+
+
+        </div>
+    </div>
+</body>
+</html>

@@ -16,5 +16,7 @@ namespace EmircanBlog_Entity.Entities
         public Image Image { get; set; }
 
         public ICollection<Article> Articles { get; set; }  
+        public ICollection<Category> Categories { get; set; }  
+   
     }
 }

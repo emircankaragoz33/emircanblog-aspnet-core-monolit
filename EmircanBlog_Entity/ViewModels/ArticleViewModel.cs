@@ -11,7 +11,14 @@ namespace EmircanBlog_Entity.ViewModels
     {
         public string Title { get; set; }
         public string Content { get; set; }
+        public string CreatedBy { get; set; }
+        public string ModifiedBy { get; set; }
+        public DateTime ModifiedDate { get; set; }
+        public DateTime CreatedDate { get; set; }
         public Guid CategoryId { get; set; }
-        public IFormFile ArticleFile { get; set; }
+        public Guid ImageId { get; set; }
+        public IFormFile formFile { get; set; }
+
+        public Guid UserId { get; set; }
     }
 }
