@@ -28,7 +28,7 @@ namespace EmircanBlog_UI.Areas.Admin.Controllers
         {
       
             var blogUser = await _userManager.FindByNameAsync(User.Identity.Name);
-            var articles = await _articleService.GetAllAsyncService(blogUser.Id);
+            var articles = await _articleService.GetAllAsyncService();
             var articleViewModel = _mapper.Map<List<ArticleListViewModel>>(articles);
             return View(articleViewModel);
         }

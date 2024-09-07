@@ -10,7 +10,7 @@ namespace EmircanBlog_Service.Abstract
     public interface IGenericService<T>
     {
         Task AddAsyncService (T Entity);
-        Task<List<T>> GetAllAsyncService(Guid UserId);
+        Task<List<T>> GetAllAsyncService();
         Task<T> GetAsyncService (Guid id);
         Task<T> GetByGuidAsyncService (Guid id);
         Task<T> UpdateAsyncService (T Entity);

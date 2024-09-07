@@ -76,9 +76,9 @@ namespace EmircanBlog_Service.Concrete
 
         }
 
-        public async Task<List<ArticleDto>> GetAllAsyncService(Guid UserId)
+        public async Task<List<ArticleDto>> GetAllAsyncService()
         {
-            var articles = await _articleDal.GetAllAsync(c=>c.IsDeleted == false && c.UserId == UserId , c=>c.Category);
+            var articles = await _articleDal.GetAllAsync(c=>c.IsDeleted == false , c=>c.Category , c=>c.Image);
 
             var articleDtos = _mapper.Map<List<ArticleDto>>(articles);
             return articleDtos;
@@ -104,6 +104,14 @@ namespace EmircanBlog_Service.Concrete
         public Task<ArticleDto> UpdateAsyncService(ArticleDto Entity)
         {
             throw new NotImplementedException();
+        }
+
+
+        public async Task<List<ArticleDto>> GetAllWithCategoryAsync(Guid CategoryId)
+        {
+            var articles = await _articleDal.GetAllAsync( c => c.CategoryId == CategoryId);
+            var articleDtos = _mapper.Map<List<ArticleDto>>(articles);
+            return articleDtos;
         }
 
         public async Task<ArticleUpdateDto> UpdateAsyncServiceUpdateDto(ArticleUpdateDto Entity)

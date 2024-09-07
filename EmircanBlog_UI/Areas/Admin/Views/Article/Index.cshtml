@@ -62,38 +62,11 @@
 
             <!-- Article Size -->
             <div class="form-group">
-                <label class="form-label">Size</label>
-                <div class="selectgroup w-100">
-                    <label class="selectgroup-item">
-                        <input type="radio"
-                               name="size"
-                               value="small"
-                               class="selectgroup-input"
-                               checked="" />
-                        <span class="selectgroup-button">Small</span>
-                    </label>
-                    <label class="selectgroup-item">
-                        <input type="radio"
-                               name="size"
-                               value="medium"
-                               class="selectgroup-input" />
-                        <span class="selectgroup-button">Medium</span>
-                    </label>
-                    <label class="selectgroup-item">
-                        <input type="radio"
-                               name="size"
-                               value="large"
-                               class="selectgroup-input" />
-                        <span class="selectgroup-button">Large</span>
-                    </label>
-                    <label class="selectgroup-item">
-                        <input type="radio"
-                               name="size"
-                               value="extra-large"
-                               class="selectgroup-input" />
-                        <span class="selectgroup-button">Extra Large</span>
-                    </label>
-                </div>
+                <label for="articleTitle">Başlık</label>
+                <input asp-for="Description" type="text"
+                       class="form-control"
+                       id="articleTitle"
+                       placeholder="Girişte sunulacak açıklama özetini giriniz." />
             </div>
 
             <!-- Article Content -->
@@ -115,8 +88,8 @@
 
             <!-- Action Buttons -->
             <div class="form-group">
-                <button type="submit" class="btn btn-success">Submit</button>
-                <button type="reset" class="btn btn-danger">Cancel</button>
+                <button type="submit" class="btn btn-success">Gönder</button>
+                <button type="reset" class="btn btn-danger">Sıfırla.</button>
             </div>
         </form>
     </div>

@@ -30,7 +30,7 @@ namespace EmircanBlog_UI.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             var user = await  _userManager.GetUserAsync(User);
-            var articles = await _articleService.GetAllAsyncService(user.Id);
+            var articles = await _articleService.GetAllAsyncService();
             var articlesListModel = _mapper.Map<List<ArticleListViewModel>>(articles);
 
             var totalVisitors = await _visitorService.GetVisitorCountAsync();

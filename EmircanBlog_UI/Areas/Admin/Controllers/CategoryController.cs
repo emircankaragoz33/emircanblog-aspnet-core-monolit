@@ -32,7 +32,7 @@ namespace EmircanBlog_UI.Areas.Admin.Controllers
 
             var blogUser = await _userManager.FindByNameAsync(User.Identity.Name);
             TempData["UserId"] = blogUser.Id.ToString();
-            var categories = await _categoryService.GetAllAsyncService(blogUser.Id);
+            var categories = await _categoryService.GetAllAsyncService();
             CategoryViewModel model = new CategoryViewModel();
             model.Categories = categories;
 

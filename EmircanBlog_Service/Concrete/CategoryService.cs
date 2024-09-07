@@ -56,9 +56,9 @@ namespace EmircanBlog_Service.Concrete
             await _unitOfWork.SaveAsync();
         }
 
-        public async Task<List<CategoryDto>> GetAllAsyncService(Guid UserId)
+        public async Task<List<CategoryDto>> GetAllAsyncService()
         {
-            var categories = await _categoryDal.GetAllAsync(c=>c.IsDeleted == false && c.UserId == UserId);
+            var categories = await _categoryDal.GetAllAsync(c=>c.IsDeleted == false );
             var categoriesDto = _mapper.Map<List<CategoryDto>>(categories);
             return categoriesDto;
         }

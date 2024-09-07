@@ -13,5 +13,6 @@ namespace EmircanBlog_Service.Abstract
     public interface IArticleService  : IGenericService<ArticleDto>
     {
         Task<ArticleUpdateDto> UpdateAsyncServiceUpdateDto(ArticleUpdateDto Entity);
+        Task<List<ArticleDto>> GetAllWithCategoryAsync(Guid CategoryId);
     }
 }
