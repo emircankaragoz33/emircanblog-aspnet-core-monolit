@@ -1,0 +1,199 @@
+﻿@using EmircanBlog_Entity.Dtos
+@model List<ArticleDto>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap" rel="stylesheet">
+
+    <title>Emircan Karagöz Blog Sitesi</title>
+
+    <!-- Bootstrap core CSS -->
+
+<!--
+
+TemplateMo 551 Stand Blog
+
+-->
+    <style>
+        .pagination {
+            display: inline-flex;
+            padding: 0;
+            list-style: none;
+            margin: 20px 0;
+        }
+
+            .pagination a {
+                display: block;
+                padding: 10px 15px;
+                margin: 0 5px;
+                border-radius: 5px;
+                text-decoration: none;
+                color: #333;
+                background: #f0f0f0;
+                transition: background 0.3s;
+            }
+
+                .pagination a.active {
+                    background: #007bff;
+                    color: #fff;
+                    font-weight: bold;
+                }
+
+                .pagination a:hover {
+                    background: #e0e0e0;
+                }
+
+                .pagination a:active {
+                    background: #ccc;
+                }
+
+        .category-filter {
+            margin: 20px 0;
+        }
+
+            .category-filter .btn-group {
+                display: flex;
+                justify-content: center;
+            }
+
+            .category-filter .btn {
+                margin: 0 5px;
+            }
+    </style>
+
+  </head>
+  <br />
+  <br />
+  <br />
+
+
+<div class="category-filter text-center">
+
+    <br />
+    <div class="btn-group" role="group" aria-label="Kategori Filtreleme">
+        <button type="button" class="btn btn-outline-primary" data-category="all">Tümü</button>
+        <button type="button" class="btn btn-outline-primary" data-category=".NET CORE">.NET Yazılarım</button>
+        <button type="button" class="btn btn-outline-primary" data-category="C#">C# Hakkında Yazılarım </button>
+        <button type="button" class="btn btn-outline-primary" data-category="Javascript">Javascript Yazılarım</button>
+        <button type="button" class="btn btn-outline-primary" data-category="category3">Veritabanı </button>
+    </div>
+</div>
+<section class="blog-posts grid-system">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-16">
+                <div class="all-blog-posts">
+                    <br />
+                   
+                   
+                 
+                    <div class="row">
+
+                        @foreach (var item in Model)
+                        {
+                            <div class="col-lg-6">
+                                <div class="blog-post">
+                                    <div class="blog-thumb">
+                                        <a href="/Blog/Index/@item.Id">  <img src="/blogTemplate/assets/images/blog-thumb-01.jpg" alt=""></a>
+                                    </div>
+                                    <div class="down-content">
+                                        <span>@item.category.Name</span>
+                                        <a href="/Blog/@item.Id"><h4>@item.Title</h4></a>
+                                        <ul class="post-info">
+                                            <li><a href="#">Emircan Karagöz</a></li>
+                                            <li><a href="#">@item.CreatedDate</a></li>
+                                            <li><a href="#">12 Comments</a></li>
+                                        </ul>
+                                        <p>@item.Description</p>
+                                        <div class="post-options">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <ul class="post-tags">
+                                                        <li><i class="fa fa-tags"></i></li>
+                                                        <li><a href="#">Best Templates</a>,</li>
+                                                        <li><a href="#">TemplateMo</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+
+                       
+                    </div>
+                </div>
+
+            </div>
+     
+        </div>
+    </div>
+</section>
+<div id="pagination" class="text-center">
+    <!-- Sayfa numaraları buraya eklenecek -->
+</div>
+
+
+
+ 
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const articlesPerPage = 6; // Her sayfada gösterilecek makale sayısı
+        const articles = document.querySelectorAll('.blog-post'); // Tüm makaleler
+        const totalPages = Math.ceil(articles.length / articlesPerPage);
+
+        let currentCategory = 'all'; // Varsayılan olarak 'all' seçili
+
+        function showPage(pageNumber) {
+            articles.forEach((article, index) => {
+                const isVisible = (index >= (pageNumber - 1) * articlesPerPage && index < pageNumber * articlesPerPage);
+                const shouldShow = currentCategory === 'all' || article.querySelector('.down-content span').textContent.trim() === currentCategory;
+                article.style.display = isVisible && shouldShow ? 'block' : 'none';
+            });
+        }
+
+        function createPagination() {
+            const paginationContainer = document.getElementById('pagination');
+            paginationContainer.innerHTML = '';
+
+            for (let i = 1; i <= totalPages; i++) {
+                const pageLink = document.createElement('a');
+                pageLink.href = '#';
+                pageLink.textContent = i;
+                pageLink.className = i === 1 ? 'active' : '';
+                pageLink.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    showPage(i);
+                    document.querySelectorAll('#pagination a').forEach(link => link.classList.remove('active'));
+                    pageLink.classList.add('active');
+                });
+                paginationContainer.appendChild(pageLink);
+            }
+        }
+
+        // Kategori filtreleme işlevselliği
+        document.querySelectorAll('.category-filter .btn').forEach(button => {
+            button.addEventListener('click', function () {
+                currentCategory = this.getAttribute('data-category');
+                createPagination();
+                showPage(1); // İlk sayfayı göster
+            });
+        });
+
+        createPagination();
+        showPage(1); // İlk sayfayı göster
+    });
+</script>

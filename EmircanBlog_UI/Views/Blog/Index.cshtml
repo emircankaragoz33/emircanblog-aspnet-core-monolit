@@ -1,0 +1,226 @@
+﻿@using EmircanBlog_Entity.Dtos
+
+@model ArticleDto
+
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<style>
+
+
+    .h5 {
+        font-size: 2.5rem;
+        margin-bottom: .5rem;
+        font-family: inherit;
+        font-weight: 500;
+        line-height: 1.2;
+    }
+
+
+    @* ck editr kodları *@ 
+
+    .marker {
+        background-color: yellow; /* Metni sarı renkle vurgulamak için */
+        color: black; /* Yazı rengini siyah yapar */
+        font-weight: bold; /* Metni kalın yapar */
+    }
+   
+
+/* Görüntülerin Maksimum Boyutlarını Ayarlama */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Tablo Stilleri */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    vertical-align: top;
+}
+
+/* Liste Stilleri */
+ol, ul {
+    padding-left: 40px;
+}
+
+/* Blok Alıntı (Blockquote) */
+blockquote {
+    margin: 1em 40px;
+    padding: 0;
+    border-left: 5px solid #ccc;
+    color: #666;
+    font-style: italic;
+}
+
+/* Başlıklar */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+/* Bağlantılar */
+a {
+    color: #06c;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Genel Element Stilleri */
+p {
+    margin: 1em 0;
+}
+
+strong {
+    font-weight: bold;
+}
+
+em {
+    font-style: italic;
+}
+
+pre {
+    background-color: #f4f4f4;
+    padding: 10px;
+    border: 1px solid #ddd;
+    overflow: auto;
+}
+
+/* CKEditor İçi Widgetlar (Varsayılan) */
+.cke_widget {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px dashed #ccc;
+    background-color: #f9f9f9;
+}
+
+/* CKEditor Placeholder Stili */
+.cke_placeholder {
+    color: #999;
+}
+
+/* CKEditor Seçilen Widget */
+.cke_widget_selected {
+    border: 2px solid #2972af;
+}
+
+.span1{
+    font-style:italic;
+}
+      
+
+</style>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-16">
+                <div class="all-blog-posts">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="blog-post">
+                            
+                                <div class="down-content">
+                                    <span1 style="margin-left:45%;" class="span1">@Model.category.Name </span1>
+                                   <h5 class="h5"> @Model.Title </h5>
+                                    <ul style="margin-left:0%" class="post-info">
+                                        <li><a href="#">Emircan Karagöz</a></li>
+                                        <li><a href="#">@Model.CreatedDate</a></li>
+                                        <li><a href="#">10 Comments</a></li>
+                                    </ul>
+                         
+                                      @Html.Raw(Model.Content)
+                           
+                                    <div class="post-options">
+                              
+                                            <div class="col-6">
+                                                <ul class="post-share">
+                                                    <li><i class="fa fa-share-alt"></i></li>
+                                                    <li><a href="#">Facebook</a>,</li>
+                                                    <li><a href="#"> Twitter</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="sidebar-item comments">
+                                <div class="sidebar-heading">
+                                    <h2>Yorumlar</h2>
+                                </div>
+                                <div class="content">
+                                    <ul>
+                                        <li>
+                                            <div class="author-thumb">
+                                                <img src="/blogTemplate/assets/images/comment-author-01.jpg" alt="">
+                                            </div>
+                                            <div class="right-content">
+                                                <h4>Charles Kate<span>May 16, 2020</span></h4>
+                                                <p>Fusce ornare mollis eros. Duis et diam vitae justo fringilla condimentum eu quis leo. Vestibulum id turpis porttitor sapien facilisis scelerisque. Curabitur a nisl eu lacus convallis eleifend posuere id tellus.</p>
+                                            </div>
+                                        </li>
+                                  
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="sidebar-item submit-comment">
+                                <div class="sidebar-heading">
+                                    <h2>Your comment</h2>
+                                </div>
+                                <div class="content">
+                                    <form id="comment" action="#" method="post">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12">
+                                                <fieldset>
+                                                    <input name="name" type="text" id="name" placeholder="Your name" required="">
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-md-6 col-sm-12">
+                                                <fieldset>
+                                                    <input name="email" type="text" id="email" placeholder="Your email" required="">
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-md-12 col-sm-12">
+                                                <fieldset>
+                                                    <input name="subject" type="text" id="subject" placeholder="Subject">
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <fieldset>
+                                                    <textarea name="message" rows="6" id="message" placeholder="Type your comment" required=""></textarea>
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <fieldset>
+                                                    <button type="submit" id="form-submit" class="main-button">Submit</button>
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+

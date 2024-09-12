@@ -1,0 +1,92 @@
+﻿ .marker {
+    background-color: yellow; /* Metni sarı renkle vurgulamak için */
+    color: black; /* Yazı rengini siyah yapar */
+    font-weight: bold; /* Metni kalın yapar */
+}
+
+
+/* Görüntülerin Maksimum Boyutlarını Ayarlama */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Tablo Stilleri */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    vertical-align: top;
+}
+
+/* Liste Stilleri */
+ol, ul {
+    padding-left: 40px;
+}
+
+/* Blok Alıntı (Blockquote) */
+blockquote {
+    margin: 1em 40px;
+    padding: 0;
+    border-left: 5px solid #ccc;
+    color: #666;
+    font-style: italic;
+}
+
+/* Başlıklar */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+/* Bağlantılar */
+a {
+    color: #06c;
+    text-decoration: none;
+}
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+/* Genel Element Stilleri */
+p {
+    margin: 1em 0;
+}
+
+strong {
+    font-weight: bold;
+}
+
+em {
+    font-style: italic;
+}
+
+pre {
+    background-color: #f4f4f4;
+    padding: 10px;
+    border: 1px solid #ddd;
+    overflow: auto;
+}
+
+/* CKEditor İçi Widgetlar (Varsayılan) */
+.cke_widget {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px dashed #ccc;
+    background-color: #f9f9f9;
+}
+
+/* CKEditor Placeholder Stili */
+.cke_placeholder {
+    color: #999;
+}
+
+/* CKEditor Seçilen Widget */
+.cke_widget_selected {
+    border: 2px solid #2972af;
+}
