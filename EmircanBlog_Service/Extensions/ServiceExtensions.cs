@@ -24,6 +24,7 @@ namespace EmircanBlog_Service.Extensions
             services.AddScoped<IImageService, ImageService>();
             services.AddScoped<IArticleService, ArticleService>();
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IContactService, ContactService>();
             services.AddScoped<IImageHelper, ImageHelper>();
             services.AddAutoMapper(assembly);
 

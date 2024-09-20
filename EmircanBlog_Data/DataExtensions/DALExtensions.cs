@@ -24,6 +24,7 @@ namespace EmircanBlog_Data.DataExtensions
             services.AddScoped<ICategoryDal, CategoryDal>();
             services.AddScoped<IImageDal, ImageDal>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IContactDal, ContactDal>();
             services.AddDbContext<EmircanContext>();
             services.AddIdentity<BlogUser,BlogRole>().AddEntityFrameworkStores<EmircanContext>().AddDefaultTokenProviders();
 

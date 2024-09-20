@@ -29,6 +29,8 @@ namespace EmircanBlog_Data.Context
 
         public DbSet<Visitor> Visitors { get; set; }
 
+        public DbSet<Contact> Contacts { get; set; }  
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

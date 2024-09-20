@@ -1,0 +1,114 @@
+﻿@using EmircanBlog_Entity.Dtos
+@model ContactDto
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<div class="heading-page header-text">
+    <section class="page-heading" style="position: relative; background-image: url('/emircankaragoz.png'); background-size: cover; background-position: center 50%; height: 70%; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.9); ">
+        <!-- Siyah Transparan Katman -->
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8);"></div>
+
+        <div class="container" style="position: relative; z-index: 1;">
+            <div class="text-content">
+                <br />
+                <br />
+                        <br />
+                <br />
+                        <br />
+                        <br />
+                        <br />
+
+                <h2 style="text-align:center; color: white;">Bana ulaşın</h2>
+            </div>
+        </div>
+
+        <!-- Kaydırma İkonu -->
+        <div style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);">
+            <a href="#about-me" style="text-decoration: none; color: white; font-size: 24px;">
+                &#9660; <!-- Aşağı ok simgesi -->
+            </a>
+        </div>
+    </section>
+</div>
+
+
+
+
+<!-- Banner Ends Here -->
+
+
+<section class="contact-us">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <div class="down-contact">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="sidebar-item contact-form">
+                                <div class="sidebar-heading">
+                                    <h2>İletişim Formu - En geç 12 saate dönerim.</h2>
+                                </div>
+                                <div class="content">
+                                    <form asp-action="Send" method="post">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12">
+                                                <fieldset>
+                                                    <input  asp-for="SenderName" type="text" id="name" placeholder="Your name" required="">
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-md-6 col-sm-12">
+                                                <fieldset>
+                                                    <input asp-for="SenderMail"  type="text" id="email" placeholder="Your email" required="">
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-md-12 col-sm-12">
+                                                <fieldset>
+                                                    <input asp-for="Subject" name="subject" type="text" id="subject" placeholder="Subject">
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <fieldset>
+                                                    <textarea asp-for="Content"  rows="6" id="message" placeholder="Your Message" required=""></textarea>
+                                                </fieldset>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <fieldset>
+                                                    <button type="submit" id="form-submit" class="main-button">Mesaj gönder.</button>
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="sidebar-item contact-information">
+                                <div class="sidebar-heading">
+                                    <h2>Iletisim</h2>
+                                </div>
+                                <div class="content">
+                                    <ul>
+
+                                        <li>
+                                            <h5>emircankaragoz@hotmail.com</h5>
+                                            <span>Mail Adresi</span>
+                                        </li>
+
+                                        <li>
+                                            <h5><a href="https://www.linkedin.com/in/emircankarag%C3%B6z/?originalSubdomain=tr"> Linkedin Hesabım </a></h5>
+                                           
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
