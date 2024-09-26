@@ -37,6 +37,7 @@ namespace EmircanBlog_UI.Areas.Admin.Controllers
             try
             {
                 var user = await _userManager.FindByEmailAsync(loginModel.Email);
+                await _userManager.UpdateSecurityStampAsync(user);
                 if (user != null)
                 {
                     var result = await _signInManager.PasswordSignInAsync(user, loginModel.Password, loginModel.RememberMe, false);

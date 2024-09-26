@@ -1,89 +1,147 @@
 ﻿@using EmircanBlog_Entity.Dtos
 @model List<ArticleDto>
 
+<style>
+    .blog-posts {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
 
+    .blog-card {
+        width: 300px;
+        margin-bottom: 30px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: transform 0.2s ease;
+    }
 
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="all-blog-posts">
-                    <div class="row">
-                        @foreach (var item in Model)
-                        {
-                            
-                    
-                        <div class="col-lg-12">
-                            <div class="blog-post">
-                                <div class="blog-thumb">
-                                        <a href="/Blog/Index/@item.Id">  <img src="~/images/@item.Image.FileName" width="300px" height="500" alt=""> </a>
-                                </div>
-                                <div class="down-content">
-                                    <span>@item.category.Name</span>
-                                        <a href="/Blog/@item.Id"><h4>@item.Title</h4></a>
-                                    <ul class="post-info">
-                                        <li><a href="#">Emircan Karagöz</a></li>
-                                        <li><a href="#">@item.CreatedDate</a></li>
-                                        <li><a href="#">12 Comments</a></li>
-                                    </ul>
-                                       
+        .blog-card:hover {
+            transform: translateY(-10px);
+        }
 
-                                     @Html.Raw(item.Description) 
+    .blog-thumb img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
 
-                                    <div class="post-options">
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <ul class="post-tags">
-                                                    <li><i class="fa fa-tags"></i></li>
-                                                    <li><a href="#">Beauty</a>,</li>
-                                                    <li><a href="#">Nature</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-6">
-                                                <ul class="post-share">
-                                                    <li><i class="fa fa-share-alt"></i></li>
-                                                    <li><a href="#">LinkedIn</a>,</li>
-                                               
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+    .down-content {
+        padding: 15px;
+    }
+
+        .down-content span {
+            display: block;
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 10px;
+        }
+
+        .down-content h4 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+    .post-info {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        gap: 15px;
+        font-size: 12px;
+        color: #999;
+    }
+
+    .post-options {
+        margin-top: 15px;
+    }
+
+    .post-tags, .post-share {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        gap: 10px;
+    }
+
+        .post-tags li, .post-share li {
+            font-size: 14px;
+            color: #777;
+        }
+
+    .main-button a {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #333;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+        .main-button a:hover {
+            background-color: #555;
+        }
+</style>
+
+<div class="container">
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="blog-posts">
+                @foreach (var item in Model)
+                {
+                    <div class="blog-card">
+                        <div class="blog-thumb">
+                            <a href="/Blog/Index/@item.Id">
+                                <img src="~/images/@item.Image.FileName" alt="">
+                            </a>
                         </div>
-
-                        }
-                       
-                        <div class="col-lg-12">
-                            <div class="main-button">
-                                <a href="blog.html">Tüm yazılar</a>
+                        <div class="down-content">
+                            <span>@item.category.Name</span>
+                            <a href="/Blog/@item.Id">
+                                <h4>@item.Title</h4>
+                            </a>
+                            <ul class="post-info">
+                                <li><a href="#">Emircan Karagöz</a></li>
+                                <li><a href="#">@item.CreatedDate</a></li>
+                                <li><a href="#">12 Comments</a></li>
+                            </ul>
+                            <p>@Html.Raw(item.Description)</p>
+                            <div class="post-options">
+                                <ul class="post-tags">
+                                    <li><i class="fa fa-tags"></i></li>
+                                    <li><a href="#">Beauty</a>,</li>
+                                    <li><a href="#">Nature</a></li>
+                                </ul>
+                                <ul class="post-share">
+                                    <li><i class="fa fa-share-alt"></i></li>
+                                    <li><a href="#">LinkedIn</a></li>
+                                </ul>
                             </div>
                         </div>
                     </div>
-                </div>
+                }
             </div>
+        </div>
 
-            @* Son paylaşımlar *@
-            <div class="col-lg-4">
-                <div class="sidebar">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="sidebar-item search">
-                                <form id="search_form" name="gs" method="GET" action="#">
-                                    <input type="text" name="q" class="searchText" placeholder="type to search..." autocomplete="on">
-                                </form>
-                            </div>
-                        </div>
+       
 
+                    <vc:random-articles></vc:random-articles>
+                    <vc:categories></vc:categories>
 
-                @*Son paylaşımalr bura.*@
-                <vc:random-articles> </vc:random-articles>
-
-            @*Kategoriler *@
-
-        <vc:categories> </vc:categories>
-        
-                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
